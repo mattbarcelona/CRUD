@@ -46,7 +46,7 @@ app.get("/usuarios/:nombre", (req, res) => {
   if (!usuario) {
     return res.status(404).json({ error: "Usuario no existe" });
   }
-  res.status(200).json(usuario);
+  res.json(usuario);
 });
 
 // Update a user
@@ -55,7 +55,7 @@ app.put("/usuarios/:nombre", (req, res) => {
   const { edad, lugarProcedencia } = req.body;
 
   const index = usuarios.findIndex(
-    (user) => user.nombre.toLowerCase() === nombre.toLowerCase()
+    (user) => user.nombre.toLocaleLowerCase() === nombre.toLocaleLowerCase()
   );
 
   if (index === -1) {
@@ -72,7 +72,7 @@ app.put("/usuarios/:nombre", (req, res) => {
 app.delete("/usuarios/:nombre", (req, res) => {
   const { nombre } = req.params;
   const usuarioExiste = usuarios.some(
-    (user) => user.nombre.toLowerCase() === nombre.toLowerCase()
+    (user) => user.nombre.toLocaleLowerCase() === nombre.toLocaleLowerCase()
   );
 
   if (!usuarioExiste) {
